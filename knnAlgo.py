@@ -1,22 +1,14 @@
-import pandas as pd  # powerful data manipulation and analysis library  & for data processing
-from sklearn.model_selection import train_test_split  # sklearn ,  for building, training, and evaluating machine learning models. 
+import pandas as pd  
+from sklearn.model_selection import train_test_split 
 from sklearn.preprocessing import LabelEncoder
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-import matplotlib.pyplot as plt # for display data
-
-
-#In summary, Pandas is used for data manipulation and preprocessing, 
-# Scikit-Learn is used for machine learning model training and evaluation,
-#  Matplotlib is used for data visualization, 
-# and the Car Evaluation dataset is used to practice classification tasks, such as predicting the acceptability of cars based on their features.
+from sklearn.neighbors import KNeighborsClassifier
 
 data = pd.read_csv("car.data")
 # data.info() ;
 
 #Data Preprocessing:
 label_encoder = LabelEncoder()
-print(data.columns)
 data['unacc'] = label_encoder.fit_transform(data['unacc'])
 # to solve this error :  could not convert string to float: 'low'
 data['vhigh'] = label_encoder.fit_transform(data['vhigh'])
@@ -35,8 +27,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 
 
-# first algo : Decision Tree Classifier for classification
-clf = DecisionTreeClassifier(class_weight='balanced', random_state=42)
+# Create a KNN classifier with k=3 (you can adjust k as needed)
+k = 3
+clf = KNeighborsClassifier(n_neighbors=k)
+
 clf.fit(X_train, y_train)
 
 #Use the trained model to make predictions on the test data:
@@ -53,3 +47,5 @@ print(classification_report(y_test, y_pred))
 
 print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
+
+
