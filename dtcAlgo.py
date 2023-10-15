@@ -21,14 +21,14 @@ clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
 
 
-# accuracy = accuracy_score(y_test, y_pred)
-# print(f"Accuracy: {accuracy:.2f}")
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy:.2f}")
 
-# print("\nClassification Report:")
-# print(classification_report(y_test, y_pred))
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
 
-# print("\nConfusion Matrix:")
-# print(confusion_matrix(y_test, y_pred))
+print("\nConfusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
 
 
 
