@@ -5,18 +5,10 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 from sklearn.neighbors import KNeighborsClassifier
 
 data = pd.read_csv("car.data")
-# data.info() ;
 
-#Data Preprocessing:
 label_encoder = LabelEncoder()
-data['unacc'] = label_encoder.fit_transform(data['unacc'])
-# to solve this error :  could not convert string to float: 'low'
-data['vhigh'] = label_encoder.fit_transform(data['vhigh'])
-data['vhigh.1'] = label_encoder.fit_transform(data['vhigh.1'])
-data['2.1'] = label_encoder.fit_transform(data['2.1'])
-data['2'] = label_encoder.fit_transform(data['2'])
-data['low'] = label_encoder.fit_transform(data['low'])
-data['small'] = label_encoder.fit_transform(data['small'])
+for column in data.columns:
+    data[column] = label_encoder.fit_transform(data[column])
 
 
 #Split Data into Training and Testing Sets:
@@ -38,7 +30,6 @@ y_pred = clf.predict(X_test)
 
 
 
-# evaluate model
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy:.2f}")
 
